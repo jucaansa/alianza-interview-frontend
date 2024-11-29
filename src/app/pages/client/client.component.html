@@ -1,0 +1,104 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">All clientes registered ({{totalElements}}) </h4>
+                <h6 class="card-subtitle">In this table you can filter by shared key and more!</h6>
+                <br>
+                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalSad">Add New Client</button>&nbsp;
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalSad">Advanced Search</button>
+                <br><br>
+                <div class="col-4">
+                    <form autocomplete="off" [formGroup]="formSharedKey">
+                        <label for="formGroupExampleInput" class="form-label">Search by Shared Key</label>
+                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Shared Key" formControlName="sharedKey">
+                        <div *ngIf="formSharedKey.get('sharedKey')?.hasError('required') && formSharedKey.get('sharedKey')?.touched">
+                            El campo es obligatorio.
+                          </div>
+                        <br>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" [disabled]="formSharedKey.invalid" data-bs-target="#clientShow" (click)="findBySharedKey()">Search</button>
+                    </form>
+                  </div>
+                  
+
+                  <br>
+                <div class="table-responsive m-t-40">
+                    <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th>Shared Key</th>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Created At</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let client of allClients">
+                                <td>{{client.shared_key}}</td>
+                                <td>{{client.name}}</td>
+                                <td *ngIf="client.type == 'BASIC_CLIENT'"><span class="badge text-bg-warning">client</span></td>
+                                <td *ngIf="client.type == 'ADMIN_CLIENT'"><span class="badge text-bg-primary">admin</span></td>
+                                <td>{{client.email}}</td>
+                                <td>{{client.phone}}</td>
+                                <td>{{client.created_at}}</td>
+                                <td>
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalSad">Edit</button>&nbsp;
+                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalSad"><b>X</b></button>
+                                </td>
+                            </tr>                 
+                        </tbody>
+                    </table>
+                    <br>
+                    <button type="button" class="btn btn-danger" (click)="exportToSvc()">Export to svc</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+  
+  <!-- Modal Sad :( )-->
+  <div class="modal fade" id="modalSad" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">I'm sorry :c </h1>
+          
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>In this modal was the form that received the fields to process the data. Unfortunately I had a flight scheduled and I didn't have time to do it. I apologize</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-success" data-bs-dismiss="modal">I feel you bro!</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<!-- Modal Search by Shared Key-->
+<div class="modal fade" id="clientShow" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">{{client?.name}}</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <label><b>Shared Key:</b> </label> <p>{{client?.shared_key}}</p>
+            <label><b>Type: </b></label> <p>{{client?.type}}</p>
+            <label><b>Email: </b></label> <p>{{client?.email}}</p>
+            <label><b>Phone: </b></label> <p>{{client?.phone}}</p>
+            <label><b>Created At: </b></label> <p>{{client?.created_at}}</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>

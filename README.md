@@ -1,5 +1,13 @@
 # AlianzaInterviewFrontend
 
+## Antes de empezar...
+Me gustaría pedir disculpas no presentar completa la parte del front. Lastimosamente coincidió un viaje planeado con el desarrollo de la prueba. Una disculpa.
+
+Por otro lado, me gustaría contarles que de los requerimientos cumplo con varios, listar clientes, buscar por sharedKey(aunque me faltó alguna validación) y exportar los datos a .svc
+
+Espero esto no afecte mi resultado, ya que mi fuerte es el backend y esa parte si la considero completa. Nuevamente, disculpas y gracias!
+
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.16.
 
 ## Development server
